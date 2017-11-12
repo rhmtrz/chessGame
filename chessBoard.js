@@ -1,15 +1,49 @@
-var chessBoard = '';
-var size = 8;
+const chessBoardModel =
+  [[null, null, null],
+  [null, "queen", null],
+  [null, null, "king"]];
 
-for (var y = 0; y < size; y++) {
-  for (var x = 0; x < size; x++) {
-    if ((y + x) % 2 === 0) {
-      chessBoard += '-';
-    } else {
-      chessBoard += '*';
+
+
+function showBoard(chessBoardModel){
+  var chessBoard = '';
+
+  for (var y = 0; y < chessBoardModel.length; y++) {
+    const theRow = chessBoardModel[y];
+    for (var x = 0; x < theRow.length; x++) {
+      const theCell = theRow[x];
+      if(theCell == null){
+        if ((y + x) % 2 === 0) {
+          chessBoard += '#';
+        } else {
+          chessBoard += '*';
+        }
+      } else  if (theCell == "queen") {
+        chessBoard += 'Q';
+      } else {
+        chessBoard += 'P';
+      }
     }
+    chessBoard += '\n';
   }
-  chessBoard += '\n';
+  console.log(chessBoard);
 }
 
-console.log(chessBoard);
+
+showBoard(chessBoardModel);
+
+/*
+  1. distinguish pieces on vie like king=>k or queen=>q
+  2. move one piece like
+    ***       **k
+    **k  =>   ***
+    ***       ***
+
+    think how to use the keyboard.
+      hint: readline()
+
+  3. distinguish user and enemy on model and view
+
+
+
+*/
