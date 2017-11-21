@@ -46,7 +46,7 @@ function creatTable() {
   var table = document.getElementById('table');
   for (var r = 0; r < chessBoard.length; r++) {
     var row = document.createElement("tr");
-    console.log(row)
+    //console.log(row)
     for (var c = 0; c < chessBoard.length; c++) {
       var cell = document.createElement("td");
     //  var cellText = document.createTextNode("Cell");
@@ -76,7 +76,30 @@ function creatTable() {
   }
 }
 creatTable();
+var selectedCellId = null;
+var cells = document.getElementsByTagName("td");
+for(var i = 0; i < cells.length; i++){
+  cells[i].addEventListener("click", function(e){
+    if (selectedCellId != null) {
+      console.log(selectedCellId, e.target.id)
+      moveKing(selectedCellId, e.target.id);
+      selectedCellId = null;
+    } else {
+      selectedCellId = e.target.id;
+    }
+  });
+}
 
+
+function moveKing(currentPositionId, nextPositionId) {
+  var king = document.getElementById(currentPositionId)
+  console.log(king)
+  king.textContent = ""
+  var nextKing = document.getElementById(nextPositionId)
+  nextKing.textContent = "King"
+}
+
+/*
 
 function startGame() {
   var cells = document.getElementsByTagName("td");
@@ -90,16 +113,19 @@ const huPlayer = "O";
 function turnClick(square) {
   turn(square.target.id, huPlayer);
 }
+
 function turn(squareId, player) {
    chessBoard[squareId] = player;
    document.getElementById(squareId).innerText = player;
+
 }
-/*
+
+
 
 function update () {
   var cellElement = document.getElementById ("0_0")
   cellElement.textContent = chessBoard[0][0];
-    if (cellElement.textContent = chessBoard) {
+    if (cellElement.textContent == chessBoard) {
       for (var i = 0; i <= chessBoard.length; i++) {
     //  console.log( 1 + "_" + i);
 
